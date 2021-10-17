@@ -1,5 +1,5 @@
 import { RpcError, ServerStreamingCall } from "@protobuf-ts/runtime-rpc";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { streamClient } from "./streamClient";
 import { StreamObserver } from "./streamObserver";
 import { StreamFunction, StreamOptions } from "./types";
@@ -30,9 +30,10 @@ export function useStream<
         [options]
     );
 
-    const [observer] = useState(
+    const observer = useMemo(
         () =>
-            new StreamObserver<TRequest, TData>(streamClient, defaultedOptions)
+            new StreamObserver<TRequest, TData>(streamClient, defaultedOptions),
+        []
     );
 
     useEffect(() => {
@@ -45,5 +46,5 @@ export function useStream<
 
     useEffect(() => {
         observer.setOptions(defaultedOptions);
-    }, [options]);
+    }, [defaultedOptions]);
 }

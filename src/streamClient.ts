@@ -13,14 +13,14 @@ export class StreamClient<
     streams: StreamsType = {};
 
     createStream(options: StreamObserverOptions<TRequest, TData, TError>) {
-        const { key } = options;
+        const { key, streamFn } = options;
 
         if (this.streams[key]) {
             return this.streams[key];
         }
 
         const stream = new Stream<TRequest, TData, TError>(key);
-        stream.fetch(options.streamFn);
+        stream.fetch(streamFn);
 
         this.streams[key] = stream;
 

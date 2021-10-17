@@ -1,6 +1,8 @@
 {
     "name": "react-grpc-query",
     "author": "danialdezfouli",
+    "version": "0.01",
+    "license": "MIT",
     "scripts": {
         "test:dev": "npm run test:types && npm run test:format && npm run test:eslint",
         "test:format": "yarn prettier --check",
