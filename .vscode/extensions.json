@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "rvest.vs-code-prettier-eslint",
+    "dbaeumer.vscode-eslint",
+    "arcanis.vscode-zipfs",
+    "esbenp.prettier-vscode"
+  ]
+}
