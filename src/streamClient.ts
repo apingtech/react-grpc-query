@@ -1,5 +1,9 @@
 import { Stream } from "./Stream";
-import { StreamFunction, StreamObserverOptions, StreamOptions } from "./types";
+import type {
+    StreamFunction,
+    StreamObserverOptions,
+    StreamOptions,
+} from "./types";
 
 type StreamsType = {
     [key: string]: Stream<any, any>;

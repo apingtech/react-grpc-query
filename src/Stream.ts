@@ -1,7 +1,6 @@
 import { streamClient } from "./streamClient";
 import { StreamObserver } from "./streamObserver";
-import { StreamFunction } from "./types";
-import { StoppableStreamingCall } from "./useStream";
+import type { StreamFunction, StoppableStreamingCall } from "./types";
 
 export class Stream<
     TRequest extends object = object,

@@ -1,15 +1,8 @@
-import { RpcError, ServerStreamingCall } from "@protobuf-ts/runtime-rpc";
+import type { RpcError } from "@protobuf-ts/runtime-rpc";
 import { useEffect, useMemo } from "react";
 import { streamClient } from "./streamClient";
 import { StreamObserver } from "./streamObserver";
-import { StreamFunction, StreamOptions } from "./types";
-
-export type StoppableStreamingCall<
-    I extends object = object,
-    O extends object = object
-> = ServerStreamingCall<I, O> & {
-    cancel(): void;
-};
+import type { StreamFunction, StreamOptions } from "./types";
 
 export function useStream<
     TRequest extends object = object,

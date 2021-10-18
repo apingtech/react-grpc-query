@@ -1,6 +1,6 @@
 import { Stream } from "./Stream";
 import { StreamClient } from "./streamClient";
-import { StreamObserverOptions } from "./types";
+import type { StreamObserverOptions } from "./types";
 
 export class StreamObserver<
     TRequest extends object = object,
