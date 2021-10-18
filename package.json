@@ -1,8 +1,16 @@
 {
     "name": "react-grpc-query",
-    "author": "danialdezfouli",
-    "version": "0.01",
+    "description": "a react hook which helps you to deal with gRPC APIs",
+    "author": "Aping Technology",
+    "version": "0.0.2",
     "license": "MIT",
+    "contributors": [
+        "Daniel Dezfouli <imdaniald@gmail.com> (https://github.com/danialdezfouli/)"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/danialdezfouli/react-grpc-query.git"
+    },
     "scripts": {
         "test:dev": "npm run test:types && npm run test:format && npm run test:eslint",
         "test:format": "yarn prettier --check",
