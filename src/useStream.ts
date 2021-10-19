@@ -1,8 +1,8 @@
-import type { RpcError } from "@protobuf-ts/runtime-rpc";
-import { useEffect, useMemo } from "react";
-import { streamClient } from "./streamClient";
-import { StreamObserver } from "./streamObserver";
-import type { StreamFunction, StreamOptions } from "./types";
+import type { RpcError } from '@protobuf-ts/runtime-rpc';
+import { useEffect, useMemo } from 'react';
+import { streamClient } from './streamClient';
+import { StreamObserver } from './streamObserver';
+import type { StreamFunction, StreamOptions } from './types';
 
 export function useStream<
     TRequest extends object = object,

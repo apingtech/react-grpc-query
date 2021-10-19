@@ -1,2 +1,2 @@
-export { useStream } from "./useStream";
-export type { StoppableStreamingCall } from "./types";
+export { useStream } from './useStream';
+export type { StoppableStreamingCall } from './types';
