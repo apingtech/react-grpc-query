@@ -29,7 +29,8 @@
         "lint": "tsdx lint",
         "prepare": "tsdx build",
         "size": "size-limit",
-        "analyze": "size-limit --why"
+        "analyze": "size-limit --why",
+        "release": "release-it"
     },
     "peerDependencies": {
         "react": ">=16"
@@ -57,6 +58,7 @@
         "husky": "^7.0.2",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
+        "release-it": "^14.11.6",
         "size-limit": "^6.0.3",
         "tsdx": "^0.14.1",
         "tslib": "^2.3.1",
