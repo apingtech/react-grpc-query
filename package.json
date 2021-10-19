@@ -2,7 +2,7 @@
     "name": "@apingtech/react-grpc-query",
     "description": "a react hook which helps you to deal with gRPC stream APIs",
     "author": "Aping Technology",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "keywords": [
         "react",
         "typescript",
