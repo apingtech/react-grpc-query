@@ -6,7 +6,7 @@ export class StreamObserver<
     TRequest extends object = object,
     TData extends object = object,
     TError = unknown
-> {
+    > {
     client: StreamClient<any, any, TError>;
 
     options!: StreamObserverOptions<TRequest, TData, TError>;
