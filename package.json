@@ -11,6 +11,9 @@
         "stream",
         "hook"
     ],
+    "workspaces": [
+        "example"
+    ],
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -63,5 +66,8 @@
         "tsdx": "^0.14.1",
         "tslib": "^2.3.1",
         "typescript": "^4.4.4"
+    },
+    "release-it": {
+        "after:bump": "npm run build"
     }
 }

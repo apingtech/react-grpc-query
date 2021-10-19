@@ -1,6 +1,6 @@
-import { streamClient } from "./streamClient";
-import { StreamObserver } from "./streamObserver";
-import type { StreamFunction, StoppableStreamingCall } from "./types";
+import { streamClient } from './streamClient';
+import { StreamObserver } from './streamObserver';
+import type { StreamFunction, StoppableStreamingCall } from './types';
 
 export class Stream<
     TRequest extends object = object,
@@ -55,7 +55,7 @@ export class Stream<
     }
 
     cancel() {
-        if (typeof this.call.cancel === "function") {
+        if (typeof this.call.cancel === 'function') {
             this.call.cancel();
         }
     }

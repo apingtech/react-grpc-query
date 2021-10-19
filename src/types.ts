@@ -1,4 +1,4 @@
-import type { ServerStreamingCall } from "@protobuf-ts/runtime-rpc";
+import type { ServerStreamingCall } from '@protobuf-ts/runtime-rpc';
 
 export type StoppableStreamingCall<
     I extends object = object,

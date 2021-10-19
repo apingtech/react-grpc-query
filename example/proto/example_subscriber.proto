@@ -1,0 +1,19 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "/proto";
+
+message ExampleSubscribeRequest {
+  int32 id = 1;
+  string name = 2;
+} 
+
+message ExampleResponseEvent {
+  string  price           = 1;
+  float   size            = 2;
+  string  timestamp       = 3;
+}
+
+service ExampleSubscriber {
+  rpc Subscribe(ExampleSubscribeRequest) returns (stream ExampleResponseEvent);
+}
