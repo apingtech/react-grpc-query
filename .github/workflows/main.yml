@@ -22,6 +22,9 @@ jobs:
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
 
+      - name: Install Berry Version
+        run: yarn set version berry
+
       - name: Lint
         run: yarn lint
 
