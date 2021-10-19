@@ -8440,7 +8440,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["example", "workspace:example"],
             ["@protobuf-ts/grpcweb-transport", "npm:2.0.7"],
             ["@protobuf-ts/plugin", "npm:2.0.7"],
-            ["@protobuf-ts/protoc", "npm:2.0.7"],
             ["@protobuf-ts/runtime", "npm:2.0.7"],
             ["@protobuf-ts/runtime-rpc", "npm:2.0.7"],
             ["@types/react", "npm:16.14.17"],
