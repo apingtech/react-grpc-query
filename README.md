@@ -104,5 +104,6 @@ function streamFunction() {
 The onSuccess will fire on every stream event fire.
 it is recommended to store onSuccess in a useCallback.
 
-The complete example is the [/example/useExampleStream.ts](https://github.com/apingtech/react-grpc-query/blob/master/example/useExampleStream.ts)
+The complete example is the [example/useExampleStream.ts](example/useExampleStream.ts)
+
  folder.
