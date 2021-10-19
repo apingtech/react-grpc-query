@@ -13,17 +13,17 @@ export class StreamClient<
     TRequest extends object = object,
     TData extends object = object,
     TError = unknown
-> {
+    > {
     streams: StreamsType = {};
 
-    createStream(options: StreamObserverOptions<TRequest, TData, TError>) {
+    createStream(options: StreamObserverOptions<TRequest, TData, TError>): Stream<TRequest, TData, TError> {
         const { key, streamFn } = options;
 
         if (this.streams[key]) {
             return this.streams[key];
         }
 
-        const stream = new Stream<TRequest, TData, TError>(key);
+        const stream = new Stream<TRequest, TData, TError>(this, key);
         stream.fetch(streamFn);
 
         this.streams[key] = stream;
@@ -54,6 +54,3 @@ export class StreamClient<
 }
 
 export const streamClient = new StreamClient();
-
-// @ts-ignore
-window.streamClient = streamClient;

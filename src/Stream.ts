@@ -1,4 +1,4 @@
-import { streamClient } from './streamClient';
+import { StreamClient } from './streamClient';
 import { StreamObserver } from './streamObserver';
 import type { StreamFunction, StoppableStreamingCall } from './types';
 
@@ -6,14 +6,25 @@ export class Stream<
     TRequest extends object = object,
     TData extends object = object,
     TError = unknown
-> {
+    > {
     key: string;
 
     observers: StreamObserver[] = [];
 
+    streamClient!: StreamClient<
+        TRequest,
+        TData,
+        TError
+    >;
+
     call!: StoppableStreamingCall<TRequest, TData>;
 
-    constructor(key: string) {
+    constructor(streamClient: StreamClient<
+        TRequest,
+        TData,
+        TError
+    >, key: string) {
+        this.streamClient = streamClient;
         this.key = key;
     }
 
@@ -50,7 +61,7 @@ export class Stream<
         this.observers = this.observers.filter((item) => item !== observer);
         if (this.observers.length === 0) {
             this.cancel();
-            streamClient.removeStream(this.key);
+            this.streamClient.removeStream(this.key);
         }
     }
 

@@ -14,5 +14,8 @@ stats-react.json
 stats.html
 .vscode/settings.json
 .idea/
-.yarn/cache
-.yarn/unplugged
+
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+.pnp.*
