@@ -1,56 +1,64 @@
 import { StreamClient } from './streamClient';
 import { StreamObserver } from './streamObserver';
-import type { StreamFunction, StoppableStreamingCall } from './types';
+import type { CancelableStreamingCall, StreamFunction } from './types';
 
 export class Stream<
     TRequest extends object = object,
     TData extends object = object,
     TError = unknown
-    > {
+> {
     key: string;
+
+    latestData?: TData;
 
     observers: StreamObserver[] = [];
 
-    streamClient!: StreamClient<
-        TRequest,
-        TData,
-        TError
-    >;
+    client!: StreamClient;
 
-    call!: StoppableStreamingCall<TRequest, TData>;
+    stream!: CancelableStreamingCall<TRequest, TData>;
 
-    constructor(streamClient: StreamClient<
-        TRequest,
-        TData,
-        TError
-    >, key: string) {
-        this.streamClient = streamClient;
+    constructor(streamClient: StreamClient, key: string) {
+        this.client = streamClient;
         this.key = key;
     }
 
     fetch = async (streamFn: StreamFunction<TRequest, TData>) => {
-        const call = streamFn();
+        this.stream = streamFn();
+        const call = this.stream.call;
 
-        this.call = call;
         try {
             for await (const response of call.responses) {
-                this.updated(response);
+                this.latestData = response;
+                this.onUpdate(response);
             }
         } catch (error) {
-            this.failed(error as TError);
+            this.onError(error as TError);
         }
     };
 
-    updated(response: TData) {
+    onUpdate(response: TData) {
         this.observers.forEach((observer) => {
-            observer.updateResult(response);
+            if (!observer.options.optimisticUpdate) {
+                observer.onUpdate(response);
+            }
         });
     }
 
-    failed(error: TError) {
+    onError(error: TError) {
         this.observers.forEach((observer) => {
-            observer.failedResult(error);
+            observer.onError(error);
         });
+    }
+
+    optimisticUpdate() {
+        if (this.latestData) {
+            this.observers.forEach((observer) => {
+                if (observer.options.optimisticUpdate) {
+                    observer.onUpdate(this.latestData!);
+                }
+            });
+            this.latestData = undefined;
+        }
     }
 
     addObserver(observer: StreamObserver) {
@@ -61,13 +69,13 @@ export class Stream<
         this.observers = this.observers.filter((item) => item !== observer);
         if (this.observers.length === 0) {
             this.cancel();
-            this.streamClient.removeStream(this.key);
+            this.client.removeStream(this.key);
         }
     }
 
     cancel() {
-        if (typeof this.call.cancel === 'function') {
-            this.call.cancel();
+        if (typeof this.stream.cancel === 'function') {
+            this.stream.cancel();
         }
     }
 }

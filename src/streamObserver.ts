@@ -1,13 +1,13 @@
 import { Stream } from './Stream';
 import { StreamClient } from './streamClient';
-import type { StreamObserverOptions } from './types';
+import type { StreamObserverOptions, StreamOptions } from './types';
 
 export class StreamObserver<
     TRequest extends object = object,
     TData extends object = object,
     TError = unknown
-    > {
-    client: StreamClient<any, any, TError>;
+> {
+    client: StreamClient;
 
     options!: StreamObserverOptions<TRequest, TData, TError>;
 
@@ -21,13 +21,13 @@ export class StreamObserver<
         this.setOptions(options);
     }
 
-    updateResult(data: TData) {
+    onUpdate(data: TData) {
         if (this.options?.onSuccess && this.options.enabled) {
             this.options.onSuccess(data);
         }
     }
 
-    failedResult(error: TError) {
+    onError(error: TError) {
         if (this.options?.onError && this.options.enabled) {
             this.options.onError(error);
         }
@@ -46,8 +46,9 @@ export class StreamObserver<
     }
 
     setOptions(options: StreamObserverOptions<TRequest, TData, TError>) {
-        const defaultOptions = {
+        const defaultOptions: Partial<StreamOptions> = {
             enabled: true,
+            optimisticUpdate: true,
         };
 
         this.options = {
