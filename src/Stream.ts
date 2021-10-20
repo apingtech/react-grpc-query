@@ -7,7 +7,7 @@ export class Stream<
     TData extends object = object,
     TError = unknown
 > {
-    private firstUpdate = false;
+    private firstUpdate = true;
 
     key: string;
 
@@ -27,7 +27,6 @@ export class Stream<
     fetch = async (streamFn: StreamFunction<TRequest, TData>) => {
         this.stream = streamFn();
         const call = this.stream.call;
-
         try {
             for await (const response of call.responses) {
                 this.onUpdate(response);
