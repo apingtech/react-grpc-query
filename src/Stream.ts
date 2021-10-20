@@ -31,7 +31,6 @@ export class Stream<
         try {
             for await (const response of call.responses) {
                 this.onUpdate(response);
-
                 this.latestData = response;
             }
         } catch (error) {
@@ -43,9 +42,9 @@ export class Stream<
         this.observers.forEach((observer) => {
             if (!observer.options.optimisticUpdate || this.firstUpdate) {
                 observer.onUpdate(response);
-                this.firstUpdate = false;
             }
         });
+        this.firstUpdate = false;
     }
 
     onError(error: TError) {
