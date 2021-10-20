@@ -7,6 +7,8 @@ export class Stream<
     TData extends object = object,
     TError = unknown
 > {
+    private firstUpdate = false;
+
     key: string;
 
     latestData?: TData;
@@ -28,8 +30,9 @@ export class Stream<
 
         try {
             for await (const response of call.responses) {
-                this.latestData = response;
                 this.onUpdate(response);
+
+                this.latestData = response;
             }
         } catch (error) {
             this.onError(error as TError);
@@ -38,8 +41,9 @@ export class Stream<
 
     onUpdate(response: TData) {
         this.observers.forEach((observer) => {
-            if (!observer.options.optimisticUpdate) {
+            if (!observer.options.optimisticUpdate || this.firstUpdate) {
                 observer.onUpdate(response);
+                this.firstUpdate = false;
             }
         });
     }
