@@ -1,2 +1,3 @@
+export type { CancelableStreamingCall } from './types';
 export { useStream } from './useStream';
-export type { StoppableStreamingCall } from './types';
+export { streamClient } from './streamClient';

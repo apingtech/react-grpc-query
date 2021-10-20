@@ -1,12 +1,14 @@
 import type { ServerStreamingCall } from '@protobuf-ts/runtime-rpc';
 
-export type StoppableStreamingCall<
+export interface CancelableStreamingCall<
     I extends object = object,
     O extends object = object
-> = ServerStreamingCall<I, O> & {
-    cancel(): void;
-};
+> {
+    call: ServerStreamingCall<I, O>;
+    cancel?(): void;
+}
 export interface StreamOptions<Data = unknown, TError = unknown> {
+    optimisticUpdate?: boolean;
     enabled?: boolean;
     onSuccess?(data: Data): void;
     onError?(error: TError): void;
@@ -24,4 +26,4 @@ export interface StreamObserverOptions<
 export type StreamFunction<
     I extends object = object,
     O extends object = object
-> = () => StoppableStreamingCall<I, O>;
+> = () => CancelableStreamingCall<I, O>;

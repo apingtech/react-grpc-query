@@ -1,8 +1,9 @@
 import type { RpcError } from '@protobuf-ts/runtime-rpc';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useLayoutEffect, useMemo } from 'react';
 import { streamClient } from './streamClient';
 import { StreamObserver } from './streamObserver';
 import type { StreamFunction, StreamOptions } from './types';
+import { defaultStreamObserverOptions } from './utils';
 
 export function useStream<
     TRequest extends object = object,
@@ -15,7 +16,7 @@ export function useStream<
 ) {
     const defaultedOptions = useMemo(
         () =>
-            streamClient.defaultStreamObserverOptions<TRequest, TData, TError>(
+            defaultStreamObserverOptions<TRequest, TData, TError>(
                 key,
                 streamFn,
                 options
@@ -25,9 +26,16 @@ export function useStream<
 
     const observer = useMemo(
         () =>
-            new StreamObserver<TRequest, TData>(streamClient, defaultedOptions),
+            new StreamObserver<TRequest, TData, TError>(
+                streamClient,
+                defaultedOptions
+            ),
         []
     );
+
+    useLayoutEffect(() => {
+        observer.setOptions(defaultedOptions);
+    }, [defaultedOptions]);
 
     useEffect(() => {
         const unsubscribe = observer.subscribe();
@@ -36,8 +44,4 @@ export function useStream<
             unsubscribe();
         };
     }, [key]);
-
-    useEffect(() => {
-        observer.setOptions(defaultedOptions);
-    }, [defaultedOptions]);
 }
