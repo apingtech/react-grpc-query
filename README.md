@@ -2,8 +2,7 @@
 
 if you are in love with React Query and you're dealing with gRPC in you're application, `react-grpc-query` is brought to you to use a simple interface to deal with streaming.
 
-> we use `protobuf-ts v2` in the examples
-> https://github.com/timostamm/protobuf-ts
+We use `protobuf-ts@2.*` in the examples https://github.com/timostamm/protobuf-ts
 
 ## Installation and Setup Instructions
 
