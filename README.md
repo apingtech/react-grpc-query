@@ -1,8 +1,8 @@
 # React gRPC Query Hook
 
-if you are in love React Query and you're dealing with gRPC in you're application, `react-grpc-query` is brought to you to use a simple interface to deal with streaming.
+if you are in love with React Query and you're dealing with gRPC in you're application, `react-grpc-query` is brought to you to use a simple interface to deal with streaming.
 
-> we use `protobuf-ts` package in the examples v2 and if you use another tools it's up to you.
+> we use `protobuf-ts` package in the examples v2 and if you use another tool it's up to you.
 > https://github.com/timostamm/protobuf-ts
 
 ## Project Status
@@ -19,13 +19,13 @@ or if you use `yarn`
 
 ## Example:
 
-react-grpc-query uses a global stream handler so you have only one open streams per each key.
+react-grpc-query uses a global stream handler so you have only one open stream per key.
 
-At first create a hook for you're stream, and use useStream hook inside.
+At first, create a hook for you're stream, and use useStream hook inside.
 Three parameters should be specified.
 
--   the first one the `key` which is a `string`
--   the second one is `stream Function` which is a the callback function which should connect to your stream transport. (more on later)
+-   the first one is the `key` which is a `string`
+-   the second one is `stream Function` which is a callback function that should connect to your stream transport. (more on later)
 -   the third parameter is called `options`
 
 ### Stream Hook Example
@@ -49,7 +49,7 @@ function useExampleStream() {
 
 ### Stream Hook Example with Config
 
-you're hook can also accept some config in this scenario you can keep the key as string by converting an object to `json` format.
+Your hook can also accept some config in this scenario you can keep the key as a string by converting an object to `JSON` format.
 
 ```ts
 function useExampleStream(config = {}) {
@@ -78,7 +78,7 @@ function useExampleStream(config = {}) {
 ### what streamFunction actually is?
 
 streamFunction is just a pure function like this:
-the cancel property lets the `react-grpc-query` to stop the streaming after unmounting the component or if the key is changed.
+the cancel property lets the `react-grpc-query` stop the streaming after unmounting the component or if the key is changed.
 
 ```tsx
 function streamFunction() {
