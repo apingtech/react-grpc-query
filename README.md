@@ -80,8 +80,6 @@ function useExampleStream(config = {}) {
 streamFunction is just a pure function like this:
 the cancel property lets the `react-grpc-query` to stop the streaming after unmounting the component or if the key is changed.
 
-> the examples are in typescript
-
 ```tsx
 function streamFunction() {
     const abortController = new AbortController();
