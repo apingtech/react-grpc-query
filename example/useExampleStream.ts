@@ -1,9 +1,5 @@
 import { useCallback, useState } from 'react';
-import { StoppableStreamingCall, useStream } from '../dist';
-import {
-    ExampleResponseEvent,
-    ExampleSubscribeRequest,
-} from './services/example_subscriber';
+import { useStream } from '../dist';
 import { ExampleSubscriberClient } from './services/example_subscriber.client';
 import transport from './transport';
 
@@ -13,13 +9,14 @@ function streamFn() {
     const call = new ExampleSubscriberClient(transport).subscribe({
         id: 1,
         name: 'Lorem',
-    }) as StoppableStreamingCall<ExampleSubscribeRequest, ExampleResponseEvent>;
+    });
 
-    call.cancel = () => {
-        abortController.abort();
+    return {
+        call,
+        cancel() {
+            abortController.abort();
+        },
     };
-
-    return call;
 }
 
 export default function useExampleStream() {
