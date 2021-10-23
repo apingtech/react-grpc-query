@@ -75,10 +75,10 @@ function useExampleStream(config = {}) {
 }
 ```
 
-### But, what actually streamFunction is?
+### what streamFunction actually is?
 
 streamFunction is just a pure function like this:
-we have specified a cancel property in our `call` which let's the `react-grpc-query` to stop the streaming after unmounting the component.
+the cancel property lets the `react-grpc-query` to stop the streaming after unmounting the component or if the key is changed.
 
 > the examples are in typescript
 
@@ -89,13 +89,12 @@ function streamFunction() {
     const call = new ExampleSubscriberClient(transport).subscribe({
         id: 1,
         name: 'Lorem',
-    }) as StoppableStreamingCall<ExampleSubscribeRequest, ExampleResponseEvent>;
+    });
 
-    call.cancel = () => {
-        abortController.abort();
+    return {
+        call,
+        cancel: () => abortController.abort()
     };
-
-    return call;
 }
 ```
 
