@@ -2,12 +2,8 @@
 
 if you are in love with React Query and you're dealing with gRPC in you're application, `react-grpc-query` is brought to you to use a simple interface to deal with streaming.
 
-> we use `protobuf-ts` package in the examples v2 and if you use another tool it's up to you.
+> we use `protobuf-ts v2` in the examples
 > https://github.com/timostamm/protobuf-ts
-
-## Project Status
-
-Ready to use in your React.js web app
 
 ## Installation and Setup Instructions
 
@@ -49,7 +45,7 @@ function useExampleStream() {
 
 ### Stream Hook Example with Config
 
-Your hook can also accept some config in this scenario you can keep the key as a string by converting an object to `JSON` format.
+Your hook can also accept some config. In this scenario, you can keep the key as a string by converting an object to `JSON` format.
 
 ```ts
 function useExampleStream(config = {}) {
