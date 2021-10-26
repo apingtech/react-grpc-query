@@ -1,6 +1,7 @@
+import { ServerStreamingCall } from '@protobuf-ts/runtime-rpc';
 import { StreamClient } from './streamClient';
 import { StreamObserver } from './streamObserver';
-import type { CancelableStreamingCall, StreamFunction } from './types';
+import type { StreamFunction } from './types';
 
 export class Stream<
     TRequest extends object = object,
@@ -8,25 +9,22 @@ export class Stream<
     TError = unknown
 > {
     private firstUpdate = true;
-
     key: string;
-
     latestData?: TData;
-
     observers: StreamObserver[] = [];
-
     client!: StreamClient;
-
-    stream!: CancelableStreamingCall<TRequest, TData>;
+    stream!: ServerStreamingCall<TRequest, TData>;
+    abortController: AbortController;
 
     constructor(streamClient: StreamClient, key: string) {
         this.client = streamClient;
         this.key = key;
+        this.abortController = new AbortController();
     }
 
     fetch = async (streamFn: StreamFunction<TRequest, TData>) => {
-        this.stream = streamFn();
-        const call = this.stream.call;
+        this.stream = streamFn(this.abortController);
+        const call = this.stream;
         try {
             for await (const response of call.responses) {
                 this.onUpdate(response);
@@ -76,8 +74,6 @@ export class Stream<
     }
 
     cancel() {
-        if (typeof this.stream.cancel === 'function') {
-            this.stream.cancel();
-        }
+        this.abortController.abort();
     }
 }

@@ -72,22 +72,21 @@ function useExampleStream(config = {}) {
 
 ### what streamFunction actually is?
 
-streamFunction is just a pure function like this:
-the cancel property lets the `react-grpc-query` stop the streaming after unmounting the component or if the key is changed.
+streamFunction is just a pure function just like this:
 
 ```tsx
-function streamFunction() {
-    const abortController = new AbortController();
+function streamFunction(abortController: AbortController) {
+    const call = new ExampleSubscriberClient(transport).subscribe(
+        {
+            id: 1,
+            name: 'Lorem',
+        },
+        {
+            abort: abortController.signal,
+        }
+    );
 
-    const call = new ExampleSubscriberClient(transport).subscribe({
-        id: 1,
-        name: 'Lorem',
-    });
-
-    return {
-        call,
-        cancel: () => abortController.abort()
-    };
+    return call;
 }
 ```
 
@@ -98,4 +97,4 @@ it is recommended to store onSuccess in a useCallback.
 
 The complete example is the [example/useExampleStream.ts](example/useExampleStream.ts)
 
- folder.
+folder.
