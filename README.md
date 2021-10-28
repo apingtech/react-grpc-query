@@ -1,11 +1,11 @@
 <p align="center">
 
-  <a aria-label="NPM package" href="https://www.npmjs.com/package/react-grpc-query-logo">
-    <img alt="" src="https://img.shields.io/npm/v/react-grpc-query-logo.svg?style=for-the-badge&labelColor=000000">
+  <a aria-label="NPM package" href="https://www.npmjs.com/package/@apingtech/react-grpc-query">
+    <img alt="" src="https://img.shields.io/npm/v/@apingtech/react-grpc-query.svg?style=for-the-badge&labelColor=000000">
   </a>
 
-  <a aria-label="Minified Size" href="https://www.npmjs.com/package/react-grpc-query-logo">
-    <img alt="" src="https://img.shields.io/bundlephobia/min/react-grpc-query-logo.svg?style=for-the-badge&labelColor=000000">
+  <a aria-label="Minified Size" href="https://www.npmjs.com/package/@apingtech/react-grpc-query">
+    <img alt="" src="https://img.shields.io/bundlephobia/min/@apingtech/react-grpc-query.svg?style=for-the-badge&labelColor=000000">
   </a>
  
 </p>
