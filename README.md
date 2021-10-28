@@ -1,6 +1,18 @@
+<p align="center">
+
+  <a aria-label="NPM package" href="https://www.npmjs.com/package/react-grpc-query-logo">
+    <img alt="" src="https://img.shields.io/npm/v/react-grpc-query-logo.svg?style=for-the-badge&labelColor=000000">
+  </a>
+
+  <a aria-label="Minified Size" href="https://www.npmjs.com/package/react-grpc-query-logo">
+    <img alt="" src="https://img.shields.io/bundlephobia/min/react-grpc-query-logo.svg?style=for-the-badge&labelColor=000000">
+  </a>
+ 
+</p>
+
 # React gRPC Query Hook
 
-if you are in love with React Query and you're dealing with gRPC in you're application, `react-grpc-query` is brought to you to use a simple interface to deal with streaming.
+If you are in love with React Query and are dealing with gRPC in your React application, `react-grpc-query` is here to help you use a simple interface to deal with streaming.
 
 We use `protobuf-ts@2.*` in the examples https://github.com/timostamm/protobuf-ts
 
@@ -8,19 +20,19 @@ We use `protobuf-ts@2.*` in the examples https://github.com/timostamm/protobuf-t
 
 `npm i @apingtech/react-grpc-query`
 
-or if you use `yarn`
+or if you use yarn
 
 `yard add @apingtech/react-grpc-query`
 
 ## Example:
 
-react-grpc-query uses a global stream handler so you have only one open stream per key.
+react-grpc-query uses a global stream handler; hence you have only one open stream per key.
 
-At first, create a hook for you're stream, and use useStream hook inside.
-Three parameters should be specified.
+At first, create a hook for you're stream, and use the useStream hook inside.
+You should specify three parameters.
 
 -   the first one is the `key` which is a `string`
--   the second one is `stream Function` which is a callback function that should connect to your stream transport. (more on later)
+-   the second one is `stream Function`, a callback function that should connect to your stream transport. (more on later)
 -   the third parameter is called `options`
 
 ### Stream Hook Example
@@ -44,7 +56,7 @@ function useExampleStream() {
 
 ### Stream Hook Example with Config
 
-Your hook can also accept some config. In this scenario, you can keep the key as a string by converting an object to `JSON` format.
+Your React Hook can also accept some config. In this scenario, you can keep the key as a string by converting an object to `JSON`.
 
 ```ts
 function useExampleStream(config = {}) {
@@ -70,9 +82,9 @@ function useExampleStream(config = {}) {
 }
 ```
 
-### what streamFunction actually is?
+### what stream function is?
 
-streamFunction is just a pure function just like this:
+The stream function is just a pure function just like this:
 
 ```tsx
 function streamFunction(abortController: AbortController) {
@@ -92,8 +104,8 @@ function streamFunction(abortController: AbortController) {
 
 ### What about onSuccess?
 
-The onSuccess will fire on every stream event fire.
-it is recommended to store onSuccess in a useCallback.
+The onSuccess will run on every stream update event running.
+We recommended you to store onSuccess in a useCallback.
 
 The complete example is the [example/useExampleStream.ts](example/useExampleStream.ts)
 
