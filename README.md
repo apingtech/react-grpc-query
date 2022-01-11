@@ -22,7 +22,7 @@ We use `protobuf-ts@2.*` in the examples https://github.com/timostamm/protobuf-t
 
 or if you use yarn
 
-`yard add @apingtech/react-grpc-query`
+`yarn add @apingtech/react-grpc-query`
 
 ## Example:
 
